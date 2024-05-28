@@ -18,5 +18,4 @@ export class TimesheetsResolver {
   async createTimesheet(@Args('createTimesheetInput') createTimesheetInput: CreateTimesheetInput) {
     return this.timesheetsService.create(createTimesheetInput);
   }
-
 }

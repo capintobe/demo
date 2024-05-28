@@ -1,7 +1,9 @@
 // src/employees/schemas/employee.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { LeaveRequest, Timesheet } from '../../entities/employee.entity';
+import { Timesheet } from '../../../timesheets/entities/timesheet.entity';
+import { LeaveRequest } from '../../../leave-requests/entities/leave-request.entity';
+
 
 export type EmployeeDocument = Employee & Document;
 

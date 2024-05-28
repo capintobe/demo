@@ -1,7 +1,23 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+// src/leave-requests/dto/create-leave-request.input.ts
+import { InputType, Field } from '@nestjs/graphql';
 
 @InputType()
 export class CreateLeaveRequestInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field()
+  employeeId: string;
+
+  @Field()
+  startDate: Date;
+
+  @Field()
+  endDate: Date;
+
+  @Field()
+  type: string;
+
+  @Field()
+  status: string;
+
+  @Field()
+  role: string;
 }
