@@ -5,29 +5,40 @@ import { Model } from 'mongoose';
 import { Employee, EmployeeDocument } from './schemas/employee.schema/employee.schema';
 import { CreateEmployeeInput } from './dto/create-employee.input';
 import { UpdateEmployeeInput } from './dto/update-employee.input';
+import { CompanyService } from '../company/company.service';
+import { CompanyDocument } from '../company/schemas/company.schema/company.schema';
 
 @Injectable()
 export class EmployeesService {
-  constructor(@InjectModel(Employee.name) private employeeModel: Model<EmployeeDocument>) {}
+  constructor(
+    @InjectModel(Employee.name) private employeeModel: Model<EmployeeDocument>,
+    private readonly companiesService: CompanyService
+  ) {}
 
-  create(createEmployeeInput: CreateEmployeeInput): Promise<Employee> {
+  async create(createEmployeeInput: CreateEmployeeInput): Promise<Employee> {
     const createdEmployee = new this.employeeModel(createEmployeeInput);
-    return createdEmployee.save();
+    const savedEmployee = await createdEmployee.save();
+    for (const companyId of createEmployeeInput.companies) {
+      const company: CompanyDocument = await this.companiesService.findOne(companyId);
+      company.employees.push(savedEmployee.id);
+      await company.save();
+    }
+    return savedEmployee;
   }
 
-  findAll(): Promise<Employee[]> {
+  async findAll(): Promise<Employee[]> {
     return this.employeeModel.find().exec();
   }
 
-  findOne(id: string): Promise<Employee> {
+  async findOne(id: string): Promise<Employee> {
     return this.employeeModel.findById(id).exec();
   }
 
-  update(id: string, updateEmployeeInput: UpdateEmployeeInput): Promise<Employee> {
-    return this.employeeModel.findByIdAndUpdate(id, updateEmployeeInput, { new: true }).exec();
+  async update(id: string, updateEmployeeInput: UpdateEmployeeInput): Promise<Employee> {
+    return await this.employeeModel.findByIdAndUpdate(id, updateEmployeeInput, { new: true }).exec();
   }
 
-    remove(id: string): Promise<Employee> {
+  async remove(id: string): Promise<Employee> {
     return this.employeeModel.findByIdAndDelete(id).exec();
   }
 }

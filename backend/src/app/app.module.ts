@@ -7,6 +7,7 @@ import { EmployeesModule } from '../employees/employees.module';
 import { TimesheetsModule } from '../timesheets/timesheets.module';
 import { LeaveRequestsModule } from '../leave-requests/leave-requests.module';
 import { PaySlipsModule } from '../pay-slips/pay-slips.module';
+import { CompanyModule } from '../company/company.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { PaySlipsModule } from '../pay-slips/pay-slips.module';
     TimesheetsModule,
     LeaveRequestsModule,
     PaySlipsModule,
+    CompanyModule,
   ],
 })
 export class AppModule {}

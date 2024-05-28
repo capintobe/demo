@@ -1,4 +1,3 @@
-// src/employees/employees.resolver.ts
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { EmployeesService } from './employees.service';
 import { Employee } from './entities/employee.entity';
