@@ -1,4 +1,5 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+// src/timesheets/timesheets.resolver.ts
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { TimesheetsService } from './timesheets.service';
 import { Timesheet } from './entities/timesheet.entity';
 import { CreateTimesheetInput } from './dto/create-timesheet.input';
@@ -8,28 +9,14 @@ import { UpdateTimesheetInput } from './dto/update-timesheet.input';
 export class TimesheetsResolver {
   constructor(private readonly timesheetsService: TimesheetsService) {}
 
-  @Mutation(() => Timesheet)
-  createTimesheet(@Args('createTimesheetInput') createTimesheetInput: CreateTimesheetInput) {
-    return this.timesheetsService.create(createTimesheetInput);
-  }
-
-  @Query(() => [Timesheet], { name: 'timesheets' })
-  findAll() {
+  @Query(() => [Timesheet])
+  async timesheets() {
     return this.timesheetsService.findAll();
   }
 
-  @Query(() => Timesheet, { name: 'timesheet' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.timesheetsService.findOne(id);
+  @Mutation(() => Timesheet)
+  async createTimesheet(@Args('createTimesheetInput') createTimesheetInput: CreateTimesheetInput) {
+    return this.timesheetsService.create(createTimesheetInput);
   }
 
-  @Mutation(() => Timesheet)
-  updateTimesheet(@Args('updateTimesheetInput') updateTimesheetInput: UpdateTimesheetInput) {
-    return this.timesheetsService.update(updateTimesheetInput.id, updateTimesheetInput);
-  }
-
-  @Mutation(() => Timesheet)
-  removeTimesheet(@Args('id', { type: () => Int }) id: number) {
-    return this.timesheetsService.remove(id);
-  }
 }

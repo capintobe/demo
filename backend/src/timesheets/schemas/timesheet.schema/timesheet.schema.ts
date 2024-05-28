@@ -1,8 +1,19 @@
-import { Schema } from 'mongoose';
+// src/timesheets/schemas/timesheet.schema.ts
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-export const TimesheetSchema = new Schema({
-  employeeId: { type: Schema.Types.ObjectId, ref: 'Employee', required: true },
-  date: { type: Date, required: true },
-  hoursWorked: { type: Number, required: true },
-  role: { type: String, required: true }, // Role title to identify which role the timesheet is for
-});
+export type TimesheetDocument = Timesheet & Document;
+
+@Schema()
+export class Timesheet {
+  @Prop({ required: true })
+  date: Date;
+
+  @Prop({ required: true })
+  hoursWorked: number;
+
+  @Prop({ required: true })
+  role: string;
+}
+
+export const TimesheetSchema = SchemaFactory.createForClass(Timesheet);

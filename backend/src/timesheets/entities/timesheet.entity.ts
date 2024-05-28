@@ -1,7 +1,17 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+// src/timesheets/entities/timesheet.entity.ts
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 
 @ObjectType()
 export class Timesheet {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => ID)
+  id: string;
+
+  @Field()
+  date: Date;
+
+  @Field()
+  hoursWorked: number;
+
+  @Field()
+  role: string;
 }
