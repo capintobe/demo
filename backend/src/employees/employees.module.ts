@@ -4,9 +4,11 @@ import { EmployeesService } from './employees.service';
 import { EmployeesResolver } from './employees.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Employee, EmployeeSchema } from './schemas/employee.schema/employee.schema';
+import { CompanyModule } from '../company/company.module';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Employee.name, schema: EmployeeSchema }])],
+  imports: [MongooseModule.forFeature([{ name: Employee.name, schema: EmployeeSchema }]),
+  CompanyModule],
   providers: [EmployeesService, EmployeesResolver],
 })
 export class EmployeesModule {}

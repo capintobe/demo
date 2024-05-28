@@ -1,9 +1,9 @@
-// src/companies/companies.service.ts
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Company, CompanyDocument } from './schemas/company.schema/company.schema';
 import { CreateCompanyInput } from './dto/create-company.input';
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class CompanyService {
@@ -18,8 +18,12 @@ export class CompanyService {
     return this.companyModel.find().exec();
   }
 
-  findOne(id: string): Promise<CompanyDocument> {
+  findOne(id: string | ObjectId): Promise<CompanyDocument> {
     return this.companyModel.findById(id).exec();
+  }
+
+  findByIds(ids: ObjectId[]): Promise<CompanyDocument[]> {
+    return this.companyModel.find({ _id: { $in: ids } }).exec();
   }
 
   update(id: string, updateCompanyInput: CreateCompanyInput): Promise<Company> {

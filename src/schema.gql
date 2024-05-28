@@ -2,6 +2,32 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type LeaveConditions {
+  annualLeave: Float!
+  sickLeave: Float!
+  otherLeave: Float!
+}
+
+type Role {
+  title: String!
+  payRate: Float!
+  leaveConditions: LeaveConditions!
+  standardHours: Float!
+}
+
+type Company {
+  id: ID!
+  name: String!
+  employees: [Employee!]!
+}
+
+type Employee {
+  id: ID!
+  name: String!
+  companies: [Company!]!
+  roles: [Role!]!
+}
+
 type Timesheet {
   id: ID!
   date: DateTime!
@@ -23,23 +49,6 @@ type LeaveRequest {
   role: String!
 }
 
-type Employee {
-  id: ID!
-  name: String!
-  roles: [Role!]!
-  timesheets: [Timesheet!]!
-  leaveRequests: [LeaveRequest!]!
-}
-
-type Role {
-  title: String!
-  payRate: Float!
-  annualLeave: Float!
-  sickLeave: Float!
-  otherLeave: Float!
-  standardHours: Float!
-}
-
 type PaySlip {
   id: ID!
   periodStart: DateTime!
@@ -52,6 +61,7 @@ type PaySlip {
 
 type Query {
   employees: [Employee!]!
+  companies: [Company!]!
   timesheets: [Timesheet!]!
   leaveRequests: [LeaveRequest!]!
   leaveRequest(id: Int!): LeaveRequest!
@@ -63,6 +73,7 @@ type Mutation {
   createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
   updateEmployee(id: String!, updateEmployeeInput: UpdateEmployeeInput!): Employee!
   removeEmployee(id: String!): Employee!
+  createCompany(createCompanyInput: CreateCompanyInput!): Company!
   createTimesheet(createTimesheetInput: CreateTimesheetInput!): Timesheet!
   createLeaveRequest(createLeaveRequestInput: CreateLeaveRequestInput!): LeaveRequest!
   updateLeaveRequest(updateLeaveRequestInput: UpdateLeaveRequestInput!): LeaveRequest!
@@ -74,22 +85,32 @@ type Mutation {
 
 input CreateEmployeeInput {
   name: String!
+  companies: [String!]!
   roles: [RoleInput!]!
 }
 
 input RoleInput {
   title: String!
   payRate: Float!
+  leaveConditions: LeaveConditionsInput!
+  standardHours: Float!
+}
+
+input LeaveConditionsInput {
   annualLeave: Float!
   sickLeave: Float!
   otherLeave: Float!
-  standardHours: Float!
 }
 
 input UpdateEmployeeInput {
   name: String
+  companies: [String!]
   roles: [RoleInput!]
   id: String!
+}
+
+input CreateCompanyInput {
+  name: String!
 }
 
 input CreateTimesheetInput {
