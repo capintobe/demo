@@ -1,0 +1,93 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Employee {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Timesheet {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type LeaveRequest {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type PaySlip {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Query {
+  employees: [Employee!]!
+  employee(id: Int!): Employee!
+  timesheets: [Timesheet!]!
+  timesheet(id: Int!): Timesheet!
+  leaveRequests: [LeaveRequest!]!
+  leaveRequest(id: Int!): LeaveRequest!
+  paySlips: [PaySlip!]!
+  paySlip(id: Int!): PaySlip!
+}
+
+type Mutation {
+  createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
+  updateEmployee(updateEmployeeInput: UpdateEmployeeInput!): Employee!
+  removeEmployee(id: Int!): Employee!
+  createTimesheet(createTimesheetInput: CreateTimesheetInput!): Timesheet!
+  updateTimesheet(updateTimesheetInput: UpdateTimesheetInput!): Timesheet!
+  removeTimesheet(id: Int!): Timesheet!
+  createLeaveRequest(createLeaveRequestInput: CreateLeaveRequestInput!): LeaveRequest!
+  updateLeaveRequest(updateLeaveRequestInput: UpdateLeaveRequestInput!): LeaveRequest!
+  removeLeaveRequest(id: Int!): LeaveRequest!
+  createPaySlip(createPaySlipInput: CreatePaySlipInput!): PaySlip!
+  updatePaySlip(updatePaySlipInput: UpdatePaySlipInput!): PaySlip!
+  removePaySlip(id: Int!): PaySlip!
+}
+
+input CreateEmployeeInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateEmployeeInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateTimesheetInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateTimesheetInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateLeaveRequestInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateLeaveRequestInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreatePaySlipInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdatePaySlipInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
