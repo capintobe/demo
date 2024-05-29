@@ -20,8 +20,14 @@ export class RoleInput {
   @Field(() => Float)
   payRate: number;
 
-  @Field(() => LeaveConditionsInput)
-  leaveConditions: LeaveConditionsInput;
+  @Field(() => Float)
+  annualLeave: number;
+
+  @Field(() => Float)
+  sickLeave: number;
+
+  @Field(() => Float)
+  otherLeave: number;
 
   @Field(() => Float)
   standardHours: number;

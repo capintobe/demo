@@ -1,4 +1,3 @@
-// src/timesheets/timesheets.resolver.ts
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { TimesheetsService } from './timesheets.service';
 import { Timesheet } from './entities/timesheet.entity';
@@ -17,5 +16,20 @@ export class TimesheetsResolver {
   @Mutation(() => Timesheet)
   async createTimesheet(@Args('createTimesheetInput') createTimesheetInput: CreateTimesheetInput) {
     return this.timesheetsService.create(createTimesheetInput);
+  }
+
+  @Mutation(() => Timesheet)
+  async updateTimesheet(@Args('id') id: string, @Args('updateTimesheetInput') updateTimesheetInput: UpdateTimesheetInput) {
+    return this.timesheetsService.update(id, updateTimesheetInput);
+  }
+
+  @Mutation(() => Timesheet)
+  async removeTimesheet(@Args('id') id: string) {
+    return this.timesheetsService.remove(id);
+  }
+
+  @Query(() => Timesheet)
+  async timesheet(@Args('id') id: string) {
+    return this.timesheetsService.findOne(id);
   }
 }

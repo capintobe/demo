@@ -30,9 +30,11 @@ type Employee {
 
 type Timesheet {
   id: ID!
+  employee: Employee!
+  company: Company!
+  role: String!
   date: DateTime!
   hoursWorked: Float!
-  role: String!
 }
 
 """
@@ -63,6 +65,7 @@ type Query {
   employees: [Employee!]!
   companies: [Company!]!
   timesheets: [Timesheet!]!
+  timesheet(id: String!): Timesheet!
   leaveRequests: [LeaveRequest!]!
   leaveRequest(id: Int!): LeaveRequest!
   paySlips: [PaySlip!]!
@@ -75,6 +78,8 @@ type Mutation {
   removeEmployee(id: String!): Employee!
   createCompany(createCompanyInput: CreateCompanyInput!): Company!
   createTimesheet(createTimesheetInput: CreateTimesheetInput!): Timesheet!
+  updateTimesheet(id: String!, updateTimesheetInput: UpdateTimesheetInput!): Timesheet!
+  removeTimesheet(id: String!): Timesheet!
   createLeaveRequest(createLeaveRequestInput: CreateLeaveRequestInput!): LeaveRequest!
   updateLeaveRequest(updateLeaveRequestInput: UpdateLeaveRequestInput!): LeaveRequest!
   removeLeaveRequest(id: Int!): LeaveRequest!
@@ -92,14 +97,10 @@ input CreateEmployeeInput {
 input RoleInput {
   title: String!
   payRate: Float!
-  leaveConditions: LeaveConditionsInput!
-  standardHours: Float!
-}
-
-input LeaveConditionsInput {
   annualLeave: Float!
   sickLeave: Float!
   otherLeave: Float!
+  standardHours: Float!
 }
 
 input UpdateEmployeeInput {
@@ -115,9 +116,19 @@ input CreateCompanyInput {
 
 input CreateTimesheetInput {
   employeeId: String!
+  companyId: String!
+  role: String!
   date: DateTime!
   hoursWorked: Float!
-  role: String!
+}
+
+input UpdateTimesheetInput {
+  employeeId: String
+  companyId: String
+  role: String
+  date: DateTime
+  hoursWorked: Float
+  id: String!
 }
 
 input CreateLeaveRequestInput {
